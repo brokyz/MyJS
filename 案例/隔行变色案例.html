@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隔行变色</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        table {
+            margin: 100px auto;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: antiquewhite;
+        }
+
+        thead th,
+        tbody td {
+            padding: 5px 15px;
+            /* border: 1px solid gray; */
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th>事件</th>
+            <th>描述</th>
+        </thead>
+        <tbody>
+            <td>onclick</td>
+            <td>点击事件</td>
+        </tbody>
+        <tbody>
+            <td>onfocus</td>
+            <td>获取焦点</td>
+        </tbody>
+        <tbody>
+            <td>onblur</td>
+            <td>失去焦点</td>
+        </tbody>
+        <tbody>
+            <td>onmouseover</td>
+            <td>鼠标经过</td>
+        </tbody>
+        <tbody>
+            <td>onmouseout</td>
+            <td>鼠标离开</td>
+        </tbody>
+    </table>
+
+    <script>
+        var tb_line = document.querySelectorAll('tbody');
+        console.log(tb_line);
+        var tmp;
+        for (let i = 0; i < tb_line.length; i++) {
+            const element = tb_line[i];
+            element.onmouseover = function(){
+                tmp = this.style.backgroundColor;
+                this.style.backgroundColor = 'aliceblue';
+            }
+
+            element.onmouseout = function(){
+                this.style.backgroundColor = tmp;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取ID</title>
+</head>
+<body>
+    <div id="time">2022-6-15</div>
+    <div class="box">盒子1</div>
+    <div class="box">盒子2</div>
+    <ul>
+        <li>brokyz1</li>
+        <li>brokyz2</li>
+        <li>brokyz3</li>
+        <li>brokyz4</li>
+        <li>brokyz5</li>
+    </ul>
+
+    <script>
+        // 1. 通过元素id获取
+        var timer = document.getElementById('time');
+        console.log(timer);
+        console.log(typeof timer);
+        // 打印返回的元素对象，更好的查看属性和方法
+        console.dir(timer);
+
+        // 2. 通过标签名获取 返回的是对象的集合 以伪数组的形式来显示
+        var lis = document.getElementsByTagName('li');
+        console.log(lis);
+        console.log(lis[1]);
+        
+        for (i = 0; i < lis.length; i++){
+            console.log(lis[i]);
+        }
+        // 如果页面中只有一个li 返回的还是伪数组的形式
+        // 如果页面中没有该元素，返回的是一个空的伪数组
+        var ul = document.getElementsByTagName('ul');
+        console.log(ul[0].getElementsByTagName('li'));
+
+        // 3. 根据类名获得
+        var box = document.getElementsByClassName('box');
+        console.log(box);
+
+        // 4. querySelector 只返回匹配到的第一个元素
+        var box = document.querySelector('.box');
+        console.log(box);
+
+        // 5. quearSelectorAll 返回匹配到的所有元素
+        var box =  document.querySelectorAll('.box');
+        console.log(box);
+    </script>
+</body>
+</html>

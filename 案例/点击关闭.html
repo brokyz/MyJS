@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击关闭</title>
+    <style>
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        .box .close {
+            position: absolute;
+            left: -20px;
+            width: 20px;
+            height: 20px;
+            background-color: antiquewhite;
+        }
+
+        .box .close:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="close">X</div>
+        <div class="qrcode">我是一个二维码</div>
+    </div>
+    <h3>块元素</h3>
+
+    <script>
+        var box = document.querySelector('.box');
+        var close = document.querySelector('.box .close');
+        close.onclick = function () {
+            box.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

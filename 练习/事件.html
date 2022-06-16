@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+<body>
+    <button id="btn">显示当前系统事件</button>
+    <div>某个时间</div>
+
+    <script>
+        // 事件源
+        var btn = document.getElementById('btn');
+        var div = document.querySelector('div');
+        btn.onclick = function(){
+            console.log('我被选中了');
+            var date = new Date();
+            var tody = '今天是 ' + date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay();
+            div.innerText = tody;
+        }
+    </script>
+</body>
+</html>

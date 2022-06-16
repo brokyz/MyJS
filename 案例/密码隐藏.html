@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密码隐藏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .login_box {
+            position: relative;
+            width: 320px;
+            /* background-color: aliceblue; */
+            margin: 100px auto;
+        }
+
+        .login_box input {
+            display: inline-block;
+            width: 320px;
+            height: 35px;
+            border: none;
+            background-color: antiquewhite;
+            border-radius: 10px;
+            padding-left: 10px;
+            outline: none;
+        }
+
+        .login_box button {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            right: 0;
+            border: none;
+            background-color: transparent;
+        }
+
+        .login_box button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login_box">
+        <input type="password" name="" id="login_password">
+        <button>O</button>
+    </div>
+
+    <script>
+        var passwd = document.querySelector('.login_box input');
+        var btn_passwd = document.querySelector('.login_box button');
+        var std_passwd = 0;
+        btn_passwd.onclick = function () {
+            if (std_passwd == 0) {
+                passwd.type = 'text';
+                btn_passwd.innerHTML = '*';
+                std_passwd = 1;
+            } else {
+                passwd.type = 'password';
+                btn_passwd.innerHTML = 'O';
+                std_passwd = 0;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

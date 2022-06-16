@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分时显示</title>
+    <style>
+        h3 {
+            background-color: antiquewhite;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h3></h3>
+    <script>
+        var hi = document.querySelector('h3');
+        var date = new Date();
+        var hours = date.getHours();
+        if (hours >= 5 && hours <= 19){
+            hi.innerHTML = '现在是白天';
+        } else {
+            hi.innerHTML = '现在是夜晚';
+        }
+    </script>
+</body>
+</html>

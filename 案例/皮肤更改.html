@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>皮肤更改</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            width: 800px;
+            margin: 200px auto;
+        }
+
+        ul li {
+            float: left;
+            width: 200px;
+            list-style: none;
+        }
+
+        ul img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><img src="../res/1.jpg" alt=""></li>
+        <li><img src="../res/2.jpg" alt=""></li>
+        <li><img src="../res/3.jpg" alt=""></li>
+        <li><img src="../res/4.jpg" alt=""></li>
+    </ul>
+
+    <script>
+        var img = document.querySelectorAll('ul img');
+        for (let i = 0; i < img.length; i++) {
+            const element = img[i];
+            element.onclick = function () {
+                document.body.style.background = 'url( ' + element.src + ')' + ' no-repeat center top';
+                document.body.style.backgroundSize = 'cover';
+            }
+        }
+    </script>
+</body>
+
+</html>
