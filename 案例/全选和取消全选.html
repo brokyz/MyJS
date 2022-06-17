@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全选和取消全选</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        table {
+            margin: 100px auto;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: antiquewhite;
+        }
+
+        thead th,
+        tbody td {
+            padding: 5px 15px;
+            /* border: 1px solid gray; */
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th><input type="checkbox" name="" id=""></th>
+            <th>事件</th>
+            <th>描述</th>
+        </thead>
+        <tbody>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>onclick</td>
+            <td>点击事件</td>
+        </tbody>
+        <tbody>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>onfocus</td>
+            <td>获取焦点</td>
+        </tbody>
+        <tbody>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>onblur</td>
+            <td>失去焦点</td>
+        </tbody>
+        <tbody>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>onmouseover</td>
+            <td>鼠标经过</td>
+        </tbody>
+        <tbody>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>onmouseout</td>
+            <td>鼠标离开</td>
+        </tbody>
+    </table>
+    <script>
+        var all = document.querySelector('th input');
+        var checks = document.querySelectorAll('td input');
+        all.onclick = function () {
+            for (let i = 0; i < checks.length; i++) {
+                const element = checks[i];
+                element.checked = this.checked;
+            }
+        }
+
+        for (let i = 0; i < checks.length; i++) {
+            const element = checks[i];
+            element.onclick = function () {
+                var flag = true;
+                for (let i = 0; i < checks.length; i++) {
+                    const element = checks[i];
+                    if (!element.checked) {
+                        flag = false;
+                    }
+                    // console.log(element.checked);
+                }
+                // console.log(flag);
+                all.checked = flag;
+            }
+        }
+    </script>
+</body>
+
+</html>
