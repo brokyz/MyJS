@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节点操作</title>
+</head>
+<body>
+    <div>我是div</div>
+    <span>我是span</span>
+    <ul>
+        <li>我是li1</li>
+        <li>我是li2</li>
+        <li>我是li3</li>
+        <li>我是li4</li>
+    </ul>
+    <div class="box">
+        <span class="erweima">x</span>
+    </div>
+    <script>
+        // 1.父节点 parentNode
+        var erweima = document.querySelector('.erweima');
+        console.log(erweima.parentNode); // 如果找不到父节点就返回为空
+
+        // 2.子节点 childNodes （集合） 得到所有子节点，包含 元素节点 文本节点等等
+        var ul = document.querySelector('ul');
+        console.log(ul.childNodes);
+        // 注意：返回值里面包含了所有的子节点
+        // 如果只想获得里面的元素节点，则需要专门处理。所以我们一般不提倡使用childNodes
+        for (let i = 0; i < ul.childNodes.length; i++) {
+            const element = ul.childNodes[i];
+            if (element.nodeType == 1){
+                console.log(element);
+            }
+        }
+
+        // children 获取所有的子元素节点 实际开发常用
+        console.log(ul.children);
+
+        // firstchild 获取第一个子节点，不管是文本节点和元素节点都可以被拿到
+        console.log(ul.firstChild);
+        // lastchild 获取最后一个子节点，不管是文本节点和元素节点都可以被拿到
+        console.log(ul.lastChild);
+        
+        // firstElementChild 获取第一个元素节点
+        console.log(ul.firstElementChild);
+        // lastElementChild 获取最后一个元素节点
+        console.log(ul.lastElementChild);
+        // 注意：这几个返回第一个和最后一个存在兼容性问题，不支持ie9
+        // 实际开发中，兼顾兼容性
+        console.log(ul.children[0]);
+
+        // 3.兄弟节点
+        // nextSibling 返回下一个兄弟节点 包含 元素节点 文本节点等等
+        console.log(ul.nextSibling);
+        // nextElement 返回下一个元素兄弟节点
+        console.log(ul.nextElementSibling);
+        // prevousSibling 返回上一个兄弟节点 包含 元素节点 文本节点等等
+        console.log(ul.previousSibling);
+        // prevousElementSibling 返回上一个兄弟节点 包含 元素节点 文本节点等等
+        console.log(ul.previousElementSibling);
+    </script>
+</body>
+</html>
