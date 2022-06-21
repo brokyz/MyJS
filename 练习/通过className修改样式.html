@@ -8,10 +8,14 @@
     <title>通过className修改样式</title>
 
     <style>
-        div {
+        .text {
             width: 400px;
             height: 400px;
             background-color: antiquewhite;
+            text-align: center;
+            line-height: 400px;
+            font-weight: 600;
+            font-size: 25px;
         }
 
         .change {
@@ -21,11 +25,11 @@
 </head>
 
 <body>
-    <div>文本</div>
+    <div class="text">文本</div>
     <script>
         var div = document.querySelector('div');
         div.onclick = function(){
-            this.className = 'change';
+            this.className += ' change';
         }
     </script>
 </body>
