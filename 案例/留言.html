@@ -26,6 +26,14 @@
             vertical-align: bottom;
             padding: 10px;
         }
+        li{
+            margin: 10px 0;
+        }
+
+        li a {
+            float: right;
+            list-style: none;
+        }
     </style>
 </head>
 
@@ -44,9 +52,18 @@
                 alert('请输入内容');
             } else {
                 var li = document.createElement('li');
-                li.innerHTML = text.value;
+                li.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
                 comment.appendChild(li);
                 text.value = '';
+                
+                var as = document.querySelectorAll('li a')
+                for (let i = 0; i < as.length; i++) {
+                    const element = as[i];
+                    element.onclick = function(){
+                        // a标签是li标签的孩子，所以直接删除当前a标签的父亲就可以删除当前留言
+                        comment.removeChild(this.parentNode);
+                    }
+                }
             }
         }
     </script>
