@@ -1,1 +1,84 @@
-ul.insertBefore(li,ul.children[0])
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三种创建元素的区别</title>
+</head>
+
+<body>
+    <h3>测试三种创建元素的方式，执行之间打印在开发者控制台</h3>
+    <button>文档流执行完毕，测试document.write</button>
+    <button>测试innerHTML执行效率</button>
+    <button>测试innerHTML结合数组执行效率</button>
+    <button>测试creatElement执行效率</button>
+    <div class="test"></div>
+    <script>
+        // document.write 当所有文档流执行完毕时，执行这段代码会导致页面重绘
+        var btn = document.querySelectorAll('button');
+        btn[0].onclick = function () {
+            document.write('<div>当所有文档流执行完毕时，执行这段代码会导致页面重绘 document.write</div>');
+        }
+
+
+        // 测试innerHTML执行效率
+        var test = document.querySelector('.test');
+        btn[1].onclick = function () {
+            if (test.children[0]) {
+                test.removeChild(test.children[0]);
+            }
+            var div = document.createElement('div');
+            var d1 = +new Date();
+            for (var i = 0; i < 2000; i++) {
+                div.innerHTML += "<div style='width:100px;border:1px solid blue;'></div>"
+            }
+            var d2 = +new Date();
+            console.log(d2 - d1);
+            test.appendChild(div);
+
+        }
+
+        // 测试innerHTML加数组效率
+        btn[2].onclick = function () {
+            if (test.children[0]) {
+                test.removeChild(test.children[0]);
+            }
+
+            var div = document.createElement('div');
+            var d1 = +new Date();
+            var arr = [];
+            for (var i = 0; i < 2000; i++) {
+                arr.push("<div style='width:100px;border:1px solid blue;'></div>");
+            }
+            div.innerHTML = arr.join('');
+            test.appendChild(div);
+            var d2 = +new Date();
+            console.log(d2 - d1);
+
+
+        }
+
+        // creatElement效率测试
+        btn[3].onclick = function () {
+            if (test.children[0]) {
+                test.removeChild(test.children[0]);
+            }
+            var div = document.createElement('div');
+            var d1 = +new Date();
+            // 注意创建要添加的元素一定要写在循环内，因为如果写在外面，只创建一次，append添加之后就没有了。
+            for (var i = 0; i < 2000; i++) {
+                var divs = document.createElement('div');
+                divs.style.border = '1px solid blue';
+                divs.style.width = '100px';
+                div.appendChild(divs);
+            }
+            var d2 = +new Date();
+            test.appendChild(div)
+            console.log(d2 - d1);
+        }
+    </script>
+</body>
+
+</html>
