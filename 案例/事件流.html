@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件流</title>
+    <style>
+        .father {
+            width: 300px;
+            height: 300px;
+            margin: 10px auto;
+            background-color: antiquewhite;
+            overflow: hidden;
+        }
+
+        .son {
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">father
+        <div class="son">
+            son 冒泡阶段 触发事件处理程序
+        </div>
+    </div>
+    <div class="father">father2
+        <div class="son">
+            son2 捕获阶段 触发事件处理程序
+        </div>
+    </div>
+    <script>
+        var son = document.querySelectorAll('.son');
+        // 指定事件在冒泡阶段触发事件处理程序
+        son[0].addEventListener('click', function () {
+            alert('son');
+        })
+        son[0].parentNode.addEventListener('click', function () {
+            alert('fatehr');
+        })
+
+        // 指定事件在捕获阶段触发事件处理程序
+        son[1].addEventListener('click', function () {
+            alert('son');
+        }, true)
+        son[1].parentNode.addEventListener('click', function () {
+            alert('fatehr');
+        }, true)
+    </script>
+</body>
+
+</html>
