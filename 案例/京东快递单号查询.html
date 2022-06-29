@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京东快递单号查询</title>
+    <style>
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 300px auto;
+            /* background-color: antiquewhite; */
+        }
+
+        .box .show {
+            display: none;
+            position: absolute;
+            top: -40px;
+            width: 160px;
+            height: 30px;
+            border: 1px solid rgba(0, 0, 0, .2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+            background-color: aliceblue;
+            margin-bottom: 10px;
+            line-height: 30px;
+            padding: 0 5px;
+        }
+
+        .box .show::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid aliceblue;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid transparent;
+            left: 10px;
+            top: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="show">123</div>
+        <input type="text" placeholder="请输入要查询的快递单号">
+    </div>
+    <script>
+        var show = document.querySelector('.show');
+        var input = document.querySelector('input');
+        input.addEventListener('keyup', function (e) {
+            if (this.value == '') {
+                show.style.display = 'none';
+            } else {
+                show.style.display = 'block';
+                show.innerHTML = this.value;
+            }
+        })
+
+        // 失去焦点隐藏
+        input.addEventListener('blur', function(){
+            show.style.display = 'none';
+        })
+
+        // 获取焦点
+        input.addEventListener('focus', function(){
+            if (this.value !== '') {
+                show.style.display = 'block';
+            }
+        })
+    </script>
+</body>
+
+</html>
