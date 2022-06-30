@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>停止setInterval</title>
+</head>
+<body>
+    <button>停止setInterval</button>
+    <script>
+        var btn = document.querySelector('button');
+        var timer = setInterval(function(){
+            console.log('1秒过去了')
+        },1000);
+        btn.addEventListener('click',function(){
+            clearInterval(timer);
+        })
+    </script>
+</body>
+</html>

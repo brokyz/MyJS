@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" placeholder="请输入手机号"> <button>发送</button>
+    <script>
+        var btn = document.querySelector('button');
+        var input = document.querySelector('input');
+        var time;
+        btn.addEventListener('click', function () {
+            time = 3;
+            input.value = '';
+            btn.disabled = true;
+            var interval = setInterval(function () {
+                if (time == 0) {
+                    // 注意这里不能是this，因为setInterval是window对象的函数，this指向的是window
+                    clearInterval(interval);
+                    btn.disabled = false;
+                    btn.innerHTML = '发送';
+                } else {
+                    btn.innerHTML = '还剩下' + time + '秒';
+                    time--;
+                }
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>
