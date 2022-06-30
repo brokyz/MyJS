@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京东秒杀</title>
+    <style>
+        .box {
+            width: 190px;
+            height: 260px;
+            background: url(../res/jd秒杀.png);
+            overflow: hidden;
+            margin: 200px auto;
+        }
+
+        #jdms {
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #jdms2 {
+            color: white;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .time {
+            width: 200px;
+            height: 50px;
+        }
+
+        .time .timein {
+            position: relative;
+            margin-left: 25px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            background-color: #2f3430;
+            color: white;
+            text-align: center;
+            font-size: 17px;
+            line-height: 30px;
+        }
+
+        .timep {
+            float: left;
+        }
+
+        .hour::after,
+        .minute::after {
+            position: absolute;
+            display: block;
+            content: ':';
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            right: -15px;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p id="jdms">京东秒杀</p>
+        <p id="jdms2">本轮秒杀结束还剩</p>
+        <div class="time">
+            <div class="timein hour">1</div>
+            <div class="timein minute">2</div>
+            <div class="timein">3</div>
+        </div>
+    </div>
+
+    <script>
+        var time = document.querySelector('.time');
+        var hour = time.children[0];
+        var miniute = time.children[1];
+        var second = time.children[2];
+        var setTime = +new Date() + 1000 * 60 * 15;
+        countDown();
+        setInterval(countDown, 1000);
+        function countDown() {
+            var nowTime = +new Date();
+            var times = (setTime - nowTime) / 1000;
+            var h = parseInt(times / 60 / 60 % 24);
+            h = h < 10 ? '0' + h : h;
+            hour.innerHTML = h;
+            var m = parseInt(times / 60 % 60)
+            m = m < 10 ? '0' + m : m;
+            miniute.innerHTML = m;
+            var s = parseInt(times % 60)
+            s = s < 10 ? '0' + s : s;
+            second.innerHTML = s;
+        }
+    </script>
+</body>
+
+</html>
