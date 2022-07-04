@@ -58,40 +58,54 @@
         var goods = document.querySelector('.goods');
         var mask = goods.children[1];
         var big = goods.children[2];
+        // 鼠标经过商品框的时候，显示遮罩层和放大图片
         goods.addEventListener('mouseover',function(){
             mask.style.display = 'block';
             big.style.display = 'block';
         })
+        // 鼠标离开的时候，隐藏遮罩层和放大图片
         goods.addEventListener('mouseout',function(){
             mask.style.display = 'none';
             big.style.display = 'none';
         })
+        // 鼠标在商品框移动时触发事件
         goods.addEventListener('mousemove',function(e){
+            // 鼠标在页面中的坐标减去商品盒子在页面中的坐标，得到了鼠标在盒子中的坐标
             var x = e.pageX - this.offsetLeft;
             var y = e.pageY - this.offsetTop;
 
+            // 鼠标在遮罩层中间时，鼠标距离盒子的坐标减去遮罩层本身的一半距离，就是遮罩层距离盒子的距离
             var maskX = x - mask.offsetWidth / 2;
             var maskY = y - mask.offsetHeight / 2;
+            // 盒子的最大边距减去遮罩层的最大边距，就是遮罩层距离盒子的最大距离，防止遮罩层溢出
             var maskMax = goods.offsetWidth - mask.offsetWidth;
+            // 阻止遮罩层水平方向溢出
             if(maskX <= 0){
                 maskX = 0;
             }else if (maskX >= goods.offsetWidth - mask.offsetWidth){
                 maskX = maskMax;
             }
-
+            // 阻止遮罩层垂直方向溢出
             if(maskY <= 0){
                 maskY = 0;
             }else if (maskY >= goods.offsetHeight - mask.offsetHeight){
                 maskY = maskMax;
             }
-
+            // 遮罩层距离盒子的距离，使遮罩层跟随鼠标动态变化
             mask.style.left = maskX + 'px';
             mask.style.top = maskY+ 'px';
 
+            // 获取要放大的图片
             var bigImg = document.querySelector('.big img');
+            // console.log(bigImg.offsetWidth);
+            // console.log(big.offsetWidth);
+            // 因为图片比盒子大，移动的最大距离时图片减去盒子的距离
             var bigMax = bigImg.offsetWidth - big.offsetWidth;
+            // console.log(bigMax);
+            // 遮罩层移动距离/遮罩层最大移动距离 = 大图片移动距离/大图片最大移动距离
             var bigX = maskX * bigMax / maskMax;
             var bigY = maskY * bigMax / maskMax;
+            // 遮罩层向右移动图片就会相对向左移动，所以遮罩层和图片移动位置相反，因此需要加个负号
             bigImg.style.left = -bigX + 'px';
             bigImg.style.top = -bigY + 'px';
 
