@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京东商品放大镜</title>
+    <style>
+        .goods {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 1px solid gray;
+            margin-top: 200px;
+            margin-left: 400px;
+        }
+
+        .mask {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: antiquewhite;
+            opacity: .5;
+            cursor: move;
+        }
+
+        .big {
+            display: none;
+            position: absolute;
+            left: 310px;
+            top: 0;
+            width: 500px;
+            height: 500px;
+            background: pink;
+            z-index: 10;
+            overflow: hidden;
+        }
+        .big img {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="goods">
+        <img src="../res/macbook.jpg" width="100%" alt="">
+        <div class="mask"></div>
+        <div class="big">
+            <img src="../res/macbook.jpg" width="140%" alt="">
+        </div>
+    </div>
+
+    <script>
+        var goods = document.querySelector('.goods');
+        var mask = goods.children[1];
+        var big = goods.children[2];
+        goods.addEventListener('mouseover',function(){
+            mask.style.display = 'block';
+            big.style.display = 'block';
+        })
+        goods.addEventListener('mouseout',function(){
+            mask.style.display = 'none';
+            big.style.display = 'none';
+        })
+        goods.addEventListener('mousemove',function(e){
+            var x = e.pageX - this.offsetLeft;
+            var y = e.pageY - this.offsetTop;
+
+            var maskX = x - mask.offsetWidth / 2;
+            var maskY = y - mask.offsetHeight / 2;
+            var maskMax = goods.offsetWidth - mask.offsetWidth;
+            if(maskX <= 0){
+                maskX = 0;
+            }else if (maskX >= goods.offsetWidth - mask.offsetWidth){
+                maskX = maskMax;
+            }
+
+            if(maskY <= 0){
+                maskY = 0;
+            }else if (maskY >= goods.offsetHeight - mask.offsetHeight){
+                maskY = maskMax;
+            }
+
+            mask.style.left = maskX + 'px';
+            mask.style.top = maskY+ 'px';
+
+            var bigImg = document.querySelector('.big img');
+            var bigMax = bigImg.offsetWidth - big.offsetWidth;
+            var bigX = maskX * bigMax / maskMax;
+            var bigY = maskY * bigMax / maskMax;
+            bigImg.style.left = -bigX + 'px';
+            bigImg.style.top = -bigY + 'px';
+
+        })
+    </script>
+</body>
+
+</html>
