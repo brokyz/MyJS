@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取URL参数</title>
+</head>
+<body>
+    <form action="获取URL参数.html">
+        <input type="text" name="uname">
+        <input type="submit" value="提交">
+    </form>
+    <div></div>
+    <script>
+        console.log(location.search)
+        var params = location.search.substring(1);
+        console.log(params);
+        var arr = params.split('=');
+        console.log(arr);
+        var div = document.querySelector('div');
+        if(arr[1]){
+            div.innerHTML = '这里是' + arr[1];
+        }
+    </script>
+</body>
+</html>
