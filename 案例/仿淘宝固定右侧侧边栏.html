@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仿淘宝固定右侧侧边栏</title>
+    <style>
+        .banner {
+            width: 1200px;
+            height: 600px;
+            margin: auto;
+            background-color: cornflowerblue;
+        }
+
+        .main {
+            width: 1200px;
+            height: 2000px;
+            margin: 10px auto;
+            background-color: greenyellow;
+        }
+
+        .scroll {
+            position: absolute;
+            left: 50%;
+            top: 650px;
+            margin-left: 600px;
+            width: 50px;
+            height: 200px;
+            background-color: pink;
+            text-align: center;
+        }
+
+        .goBack {
+            display: none;
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner"></div>
+    <div class="main"></div>
+    <div class="scroll">
+        <span class="goBack">top</span>
+    </div>
+    <script>
+        // 获取元素
+        var scroll = document.querySelector('.scroll');
+        var goBack = scroll.children[0];
+        var main = document.querySelector('.main');
+        var mainTop = main.offsetTop;
+        var originMainTop = scroll.offsetTop;
+        var fixedMainTop = originMainTop - mainTop;
+        // 页面滚动事件
+        document.addEventListener('scroll', function () {
+            if (window.pageYOffset >= mainTop) {
+                scroll.style.position = 'fixed';
+                scroll.style.top = fixedMainTop + 'px';
+                goBack.style.display = 'block';
+            } else {
+                scroll.style.position = 'absolute';
+                scroll.style.top = originMainTop + 'px';
+                goBack.style.display = 'none';
+            }
+        })
+        goBack.addEventListener('click', function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        })
+
+    </script>
+</body>
+
+</html>
