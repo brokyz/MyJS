@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝焦点图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .tb-promo {
+            position: relative;
+            width: 520px;
+            height: 280px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .tb-promo .promo-img {
+            height: 280px;
+            width: 520px;
+            border-radius: 15px;
+        }
+
+        .tb-promo ul {
+            position: absolute;
+            /* left: -520px; */
+            width: 600%;
+        }
+
+        .tb-promo ul li {
+            float: left;
+        }
+
+        .tb-promo ol {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            /* width: 80px; */
+            height: 15px;
+            margin-left: -40px;
+            /* background-color: pink; */
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, .7);
+        }
+
+        .tb-promo ol li {
+            top: 3px;
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin: 0 3px;
+            margin-top: 2px;
+            background-color: #fff;
+            border-radius: 100%;
+        }
+
+        .tb-promo ol li:hover {
+            cursor: pointer;
+        }
+
+        .tb-promo ol .current {
+            background-color: #ff5000;
+        }
+
+        .prev {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .3);
+            color: #fff;
+            border-radius: 0 15px 15px 0;
+            line-height: 30px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .next {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-top: -15px;
+            width: 20px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, .3);
+            color: #fff;
+            border-radius: 15px 0 0 15px;
+            line-height: 30px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .next:hover,
+        .prev:hover {
+            cursor: pointer;
+        }
+    </style>
+    <script src="./js/animate.js"></script>
+    <script src="./js/轮播图.js"></script>
+</head>
+
+<body>
+    <div class="tb-promo">
+        <a src="" alt="" class="prev">&lt</a>
+        <a src="" alt="" class="next">></a>
+        <ul>
+            <li>
+                <img src="../res/taobao-promo.png" alt="" class="promo-img">
+            </li>
+            <li>
+                <img src="../res/taobao-promo1.png" alt="" class="promo-img">
+            </li>
+            <li>
+                <img src="../res/taobao-promo2.png" alt="" class="promo-img">
+            </li>
+            <li>
+                <img src="../res/taobao-promo3.png" alt="" class="promo-img">
+            </li>
+        </ul>
+        <ol class="circle">
+        </ol>
+
+    </div>
+</body>
+
+</html>
