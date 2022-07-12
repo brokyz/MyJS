@@ -8,11 +8,13 @@ function animate(obj, target, callback) {
         if (obj.offsetLeft == target) {
             clearInterval(obj.timer);
             // 回调函数写到定时器结束的时候调用
-            if (callback) {
-                callback();
-            }
+            // if (callback) {
+            //     callback();
+            // }
+            // 高级写法
+            callback && callback();
         }
         obj.style.left = obj.offsetLeft + step + 'px';
         // console.log('stop');
-    }, 15)
+    }, 10)
 }

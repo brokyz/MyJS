@@ -1,76 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>仿淘宝固定右侧侧边栏</title>
     <style>
-        .banner {
-            width: 1200px;
-            height: 600px;
-            margin: auto;
-            background-color: cornflowerblue;
-        }
+      .banner {
+        width: 1200px;
+        height: 600px;
+        margin: auto;
+        background-color: cornflowerblue;
+      }
 
-        .main {
-            width: 1200px;
-            height: 2000px;
-            margin: 10px auto;
-            background-color: greenyellow;
-        }
+      .main {
+        width: 1200px;
+        height: 2000px;
+        margin: 10px auto;
+        background-color: greenyellow;
+      }
 
-        .scroll {
-            position: absolute;
-            left: 50%;
-            top: 650px;
-            margin-left: 600px;
-            width: 50px;
-            height: 200px;
-            background-color: pink;
-            text-align: center;
-        }
+      .scroll {
+        position: absolute;
+        left: 50%;
+        top: 650px;
+        margin-left: 600px;
+        width: 50px;
+        height: 200px;
+        background-color: pink;
+        text-align: center;
+      }
 
-        .goBack {
-            display: none;
-            background-color: beige;
-        }
+      .goBack {
+        display: none;
+        background-color: beige;
+        cursor: pointer;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="banner"></div>
     <div class="main"></div>
     <div class="scroll">
-        <span class="goBack">top</span>
+      <span class="goBack">top</span>
     </div>
     <script>
-        // 获取元素
-        var scroll = document.querySelector('.scroll');
-        var goBack = scroll.children[0];
-        var main = document.querySelector('.main');
-        var mainTop = main.offsetTop;
-        var originMainTop = scroll.offsetTop;
-        var fixedMainTop = originMainTop - mainTop;
-        // 页面滚动事件
-        document.addEventListener('scroll', function () {
-            if (window.pageYOffset >= mainTop) {
-                scroll.style.position = 'fixed';
-                scroll.style.top = fixedMainTop + 'px';
-                goBack.style.display = 'block';
-            } else {
-                scroll.style.position = 'absolute';
-                scroll.style.top = originMainTop + 'px';
-                goBack.style.display = 'none';
-            }
-        })
-        goBack.addEventListener('click', function () {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        })
-
+      // 获取元素
+      var scroll = document.querySelector(".scroll");
+      var goBack = scroll.children[0];
+      var main = document.querySelector(".main");
+      var mainTop = main.offsetTop;
+      var originMainTop = scroll.offsetTop;
+      var fixedMainTop = originMainTop - mainTop;
+      // 页面滚动事件
+      document.addEventListener("scroll", function () {
+        if (window.pageYOffset >= mainTop) {
+          scroll.style.position = "fixed";
+          scroll.style.top = fixedMainTop + "px";
+          goBack.style.display = "block";
+        } else {
+          scroll.style.position = "absolute";
+          scroll.style.top = originMainTop + "px";
+          goBack.style.display = "none";
+        }
+      });
+      // 动画函数
+      function animate(obj, target, callback) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+          // 把步长值改为整数，来防止小数计算，使得目标到不了指定位置而无法停止
+          // 当step是正数向上取整（取大），当是负数向下取整（取小）
+          var step = (target - window.pageYOffset) / 10;
+          step = step > 0 ? Math.ceil(step) : Math.floor(step);
+          if (window.pageYOffset == target) {
+            clearInterval(obj.timer);
+            // 回调函数写到定时器结束的时候调用
+            // if (callback) {
+            //     callback();
+            // }
+            // 高级写法
+            callback && callback();
+          }
+          // obj.style.left = window.pageYOffset + step + 'px';
+          window.scrollTo(0, window.pageYOffset + step);
+          // console.log('stop');
+        }, 10);
+      }
+      goBack.addEventListener("click", function () {
+        // 因为是窗口滚动所以给的对象是window
+        animate(window, 0);
+        // window.scrollTo(0, 0);
+        // document.body.scrollTop = 0;
+        // document.documentElement.scrollTop = 0;
+      });
     </script>
-</body>
-
+  </body>
 </html>
