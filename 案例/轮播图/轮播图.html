@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            margin: 200px auto;
+            background-color: aliceblue;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .prev,
+        .next {
+            display: none;
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 30px;
+            margin-top: -15px;
+            display: inline-block;
+            color: white;
+            background-color: rgba(0, 0, 0, .3);
+            text-align: center;
+            line-height: 30px;
+            z-index: 2;
+        }
+
+        .prev:hover,
+        .next:hover {
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .promo {
+            position: absolute;
+        }
+
+        .promo li {
+            float: left;
+        }
+
+        .promo li .promo_img {
+            width: 600px;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .circle {
+            position: absolute;
+            right: 5%;
+            bottom: 5px;
+            height: 15px;
+            /* width: 50px; */
+            /* background-color: rgba(255, 255, 255, .7); */
+            border-radius: 10px;
+        }
+
+        .circle li {
+            float: left;
+            margin-top: 2px;
+            margin-left: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 10px;
+        }
+
+        .circle li:hover {
+            background-color: coral;
+            cursor: pointer;
+        }
+
+        .circle .promo_now {
+            background-color: coral;
+        }
+    </style>
+    <script src="../js/animate.js"></script>
+</head>
+
+<body>
+    <div class="slideshow">
+        <a src="" alt="" class="prev iconfont">0</a>
+        <a src="" alt="" class="next iconfont">0</a>
+        <ul class="promo">
+            <li>
+                <img src="../../res/taobao-promo.png" alt="" class="promo_img" />
+            </li>
+            <li>
+                <img src="../../res/taobao-promo1.png" alt="" class="promo_img" />
+            </li>
+            <li>
+                <img src="../../res/taobao-promo2.png" alt="" class="promo_img" />
+            </li>
+            <li>
+                <img src="../../res/taobao-promo3.png" alt="" class="promo_img" />
+            </li>
+        </ul>
+        <ol class="circle">
+        </ol>
+    </div>
+
+    <script>
+        // 1. 获取所需要操作的元素。
+        var slideshow = document.querySelector(".slideshow");
+        var prev = document.querySelector(".prev");
+        var next = document.querySelector(".next");
+        var ul = slideshow.querySelector("ul");
+        var ol = slideshow.querySelector(".circle");
+        var imgWidth = slideshow.offsetWidth;
+        // 2. 鼠标经过轮播图显示上一页下一页
+        slideshow.addEventListener("mouseenter", function () {
+            prev.style.display = "block";
+            next.style.display = "block";
+            // 9. 实现轮播图定时自动切换下一页。
+            clearInterval(promo_auto);
+        })
+        // 2. 鼠标离开轮播图隐藏上一页下一页
+        slideshow.addEventListener("mouseleave", function () {
+            prev.style.display = "none";
+            next.style.display = "none";
+            // 9. 实现轮播图定时自动切换下一页。
+            promo_auto = setInterval(function () {
+                next.click();
+            }, 3000);
+        })
+        // 3. 动态设定轮播图本质主体的宽度。
+        ul.style.width = (ul.children.length + 1) * imgWidth + "px";
+
+        // 4. 动态生成轮播图对应的显示按钮。
+        for (var i = 0; i < ul.children.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("index", i);
+            ol.appendChild(li);
+            li.addEventListener("click", function () {
+                for (var i = 0; i < ol.children.length; i++) {
+                    ol.children[i].className = "";
+                }
+                this.className = "promo_now";
+                // 8. 实现轮播图点击按钮移动到相对应的轮播图。
+                var promo_now = document.querySelector(".promo_now");
+                var promo_index = promo_now.getAttribute("index");
+                target = promo_index * imgWidth;
+                animate(ul, -target);
+            })
+        }
+        // 设置第一个按钮为当前按钮
+        ol.children[0].className = "promo_now";
+        // 5. 复制在轮播图中复制并尾插入轮播图的第一张图片，为了优化第一页和最后一页之间的切换动画。
+        var ul0 = ul.children[0].cloneNode(true);
+        ul.appendChild(ul0);
+        // 6. 实现轮播图下一页的逻辑。
+        next.addEventListener("click", function () {
+            var promo_now = document.querySelector(".promo_now");
+            var promo_index = promo_now.getAttribute("index");
+            target = (promo_index - 0 + 1) * imgWidth;
+            promo_now.className = "";
+            animate(ul, -target, function () {
+                if ((promo_index - 0 + 1) == ol.children.length) {
+                    ul.style.left = "0px";
+                }
+            });
+            if ((promo_index - 0 + 1) == ol.children.length) {
+                ol.children[0].className = "promo_now";
+            } else {
+                ol.children[promo_index - 0 + 1].className = "promo_now";
+            }
+        })
+        // 7. 实现轮播图上一页的逻辑。
+        prev.addEventListener("click", function () {
+            var promo_now = document.querySelector(".promo_now");
+            var promo_index = promo_now.getAttribute("index");
+            if (promo_index == 0) {
+                ul.style.left = -(ul.children.length - 1) * imgWidth + "px";
+                promo_index = (ul.children.length - 1);
+            }
+            target = (promo_index - 1) * imgWidth;
+            promo_now.className = "";
+            animate(ul, -target);
+            console.log("target:" + target);
+            console.log("promo_index:" + (promo_index - 1));
+            ol.children[promo_index - 1].className = "promo_now";
+        })
+
+        // 9. 实现轮播图定时自动切换下一页。
+        var promo_auto = setInterval(function () {
+            next.click();
+        }, 3000);
+
+    </script>
+</body>
+
+</html>
