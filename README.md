@@ -7,7 +7,7 @@
     用 于 记 录 JS 学 习 及 案 例
   </p> 
   <p align="center">
-    <a style="text-decoration:none" href="https://brokyz.github.io/MyJavaScript/" target="_blank">案例演示站点</a>
+    <a style="text-decoration:none" href="https://brokyz.github.io/MyJS/" target="_blank">案例演示站点</a>
    </p>
 </div>
 
